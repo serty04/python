@@ -36,6 +36,8 @@ def one_time_code_win_layout():
         layout = [
                 [sg.Text('one time code', size=(15, 1), key='one_time_code_key')],
                 [sg.Input(key='one_time_code_inp')]
+                [sg.Button('Continue'),  sg.Button('Close')]
+                
 
         ]
 
