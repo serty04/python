@@ -31,15 +31,14 @@ def create_user_win_layout():
         return layout
 
 
-
-def bank_layout():
+def bank_win_layout():
         layout = [
-                [sg.Text('Bodø bank',size=(160, 50), key='bodø_bank_key'), sg.Button('logg out')],
-                [sg.Input(key='bodø_bank_key')],
+                [sg.Frame()],
+                [sg.Text('Bodø bank', key='bodø_bank_key'), sg.Button('logg out')],
+                [sg.Input(key='bodø_bank_key')], [sg.Button('Enter'),sg.Button('Close')],
+                [sg.Text ('betale_fra'), sg.Text ('betale_til')],
                 [sg.Text('konto_nmr'), sg.Text('hvilken_konto')],
-                [sg.Text(('konto navn'), key='konto_navn_tf')] [sg.Text(('penger_på_konto'), key='konto penger')],
-                [sg.Button('Enter'),sg.Button('Close')],
-                
+                [sg.Text(('konto navn'), key='konto_navn_tf')], [sg.Text(('penger_på_konto'), key='konto penger')],
         ]
 
         return layout
@@ -48,7 +47,7 @@ logg_inn_win = sg.Window('logg_inn_win', logg_inn_win_layout(), element_justific
 #window.maximize()
 create_user_win = sg.Window('create_user_win', create_user_win_layout(), element_justification='c') #finalize() and window.maximize() make the window full screan
 #window.maximize()
-bank_win = sg.Window('Bodø bank', bank_layout()) #finalize() and window.maximize,element_justification='c') #finalize() and window.maximize() make the window full screan
+bank_win = sg.Window('Bodø bank',  bank_win_layout(), size=(1000, 1050)) #finalize() and window.maximize,element_justification='c') #finalize() and window.maximize() make the window full screan
 #window.maximize()
 
 #event2, values2 = create_user_win.read(timeout=100)
