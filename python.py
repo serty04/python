@@ -1,7 +1,22 @@
 from socket import close
 from time import time
 import PySimpleGUI as sg
+import mysql.connector
+
+mydb = mysql.connector.connect(
+    host="127.0.0.1",
+    user="root",
+    passwd="",
+    database="bodø_bank"
+)
+mycursor = mydb.cursor()
+sql = "SELECT regid, brand, model, year FROM car"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
  
+print(myresult)
+
+
 sg.ChangeLookAndFeel('GrayGrayGray')
 def logg_inn_win_layout():     
         layout = [
@@ -33,7 +48,7 @@ def create_user_win_layout():
 
 def bank_win_layout():
         layout = [
-                [sg.Frame()],
+                
                 [sg.Text('Bodø bank', key='bodø_bank_key'), sg.Button('logg out')],
                 [sg.Input(key='bodø_bank_key')], [sg.Button('Enter'),sg.Button('Close')],
                 [sg.Text ('betale_fra'), sg.Text ('betale_til')],
