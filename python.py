@@ -1,20 +1,17 @@
 from socket import close
 from time import time
 import PySimpleGUI as sg
-#import mysql.connector
+import sqlite3
 
-#mydb = mysql.connector.connect(
-#    host="127.0.0.1",
-#    user="root",
-#    passwd="",
-#    database="bodø_bank"
-#)
-#mycursor = mydb.cursor()
-#sql = "SELECT * FROM user"
-#mycursor.execute(sql)
-#myresult = mycursor.fetchall()
- 
-#print(myresult)
+
+
+connection = sqlite3.connect('shows.db')
+cursor = connection.cursor()
+cursor.execute('''CREATE TABLE IF NOT EXISTS Shows
+              (Title TEXT, Director TEXT, Year INT)''')
+
+connection.commit()
+connection.close()
 
 
 sg.ChangeLookAndFeel('GrayGrayGray')
