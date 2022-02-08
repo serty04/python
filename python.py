@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
     database="bodø_bank"
 )
 mycursor = mydb.cursor()
-sql = "SELECT regid, brand, model, year FROM car"
+sql = "SELECT * FROM user"
 mycursor.execute(sql)
 myresult = mycursor.fetchall()
  
@@ -125,5 +125,3 @@ while True:  # Event Loop
                         logg_inn_win_active = True
                         logg_inn_win.UnHide()
                         create_user_win.Hide()
-
-       
