@@ -1,20 +1,20 @@
 from socket import close
 from time import time
 import PySimpleGUI as sg
-import mysql.connector
+#import mysql.connector
 
-mydb = mysql.connector.connect(
-    host="127.0.0.1",
-    user="root",
-    passwd="",
-    database="bodø_bank"
-)
-mycursor = mydb.cursor()
-sql = "SELECT * FROM user"
-mycursor.execute(sql)
-myresult = mycursor.fetchall()
+#mydb = mysql.connector.connect(
+#    host="127.0.0.1",
+#    user="root",
+#    passwd="",
+#    database="bodø_bank"
+#)
+#mycursor = mydb.cursor()
+#sql = "SELECT * FROM user"
+#mycursor.execute(sql)
+#myresult = mycursor.fetchall()
  
-print(myresult)
+#print(myresult)
 
 
 sg.ChangeLookAndFeel('GrayGrayGray')
@@ -50,10 +50,9 @@ def bank_win_layout():
         layout = [
                 
                 [sg.Text('Bodø bank', key='bodø_bank_key'), sg.Button('logg out')],
-                [sg.Input(key='bodø_bank_key')], [sg.Button('Enter'),sg.Button('Close')],
                 [sg.Text ('betale_fra'), sg.Text ('betale_til')],
-                [sg.Text('konto_nmr'), sg.Text('hvilken_konto')],
-                [sg.Text(('konto navn'), key='konto_navn_tf')], [sg.Text(('penger_på_konto'), key='konto penger')],
+                [sg.Text('konto:'), sg.Text('Add konto nummer'), sg.Text('Navn på konto'), sg.Input(key='bodø_bank_key'), sg.Button('Enter')],
+                [sg.Text('Eier navn', key='owner_account'), sg.Text('Disp:'), sg.Text('Penger på konto', key='disp_amount')],
         ]
 
         return layout
