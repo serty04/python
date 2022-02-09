@@ -1,17 +1,22 @@
-from socket import close
-from time import time
 import PySimpleGUI as sg
-import sqlite3
+import mysql.connector
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="bodo_bank"
+)
 
 
+mycursor = mydb.cursor()
 
-connection = sqlite3.connect('shows.db')
-cursor = connection.cursor()
-cursor.execute('''CREATE TABLE IF NOT EXISTS Shows
-              (Title TEXT, Director TEXT, Year INT)''')
+mycursor.execute("CREATE DATABASE bodø bank")
+ 
 
-connection.commit()
-connection.close()
+for x in mycursor:
+        print(x)
+
 
 
 sg.ChangeLookAndFeel('GrayGrayGray')
@@ -78,15 +83,33 @@ while True:  # Event Loop
 
         
         if event == 'Enter':
-                if values['brukernavn_inp'] == 'Elias' and values['per_pass_inp'] == '123':
-                        event3, values3 = bank_win.read(timeout=100)
-                        bank_win_active = True
-                        logg_inn_win.Hide()
-                        bank_win.UnHide()
+
+                username = values['-username-']
+                pw = values['-password-']
+        
+                sql = "SELECT username, password FROM users WHERE username =%s AND password = %s"
+                mycursor.execute(sql, (username, pw))
+                myresult = mycursor.fetchall()
+                
+                row_count = mycursor.rowcount
+               
                         
+                if row_count == 1:
+   
+                                event3, values3 = bank_win.read(timeout=100)
+                                bank_win_active = True
+                                logg_inn_win.Hide()
+                                bank_win.UnHide()
+                                
                 else:
                         sg.popup('Wrong username or password')
         
+        sql = "SELECT username, password FROM user WHERE username USERNAME = '%s' AND password = %s"
+        mycursor.execute(sql,(username, pw))
+        myresult = mycursor.fetchall()
+
+       
+
         if event == 'Create user':
                 create_user_win_active = True
                 event2, values2 = create_user_win.read(timeout=100)
