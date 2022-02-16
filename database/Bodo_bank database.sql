@@ -1,0 +1,1 @@
+SELECT * FROM bodo_bank.user;

@@ -11,11 +11,6 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE DATABASE bodø bank")
- 
-
-for x in mycursor:
-        print(x)
 
 
 
@@ -23,9 +18,9 @@ sg.ChangeLookAndFeel('GrayGrayGray')
 def logg_inn_win_layout():     
         layout = [
                 [sg.Text('Brukernavn:'), sg.Text(size=(15, 1), key = 'bruk_navn')],
-                [sg.Input(key='brukernavn_inp')],
-                [sg.Text('Personlig passord:'), sg.Text(size=(15, 1), key='per_pass')],
-                [sg.Input(key='per_pass_inp', password_char='*')],
+                [sg.Input(key='-username-')],
+                [sg.Text('Personlig passord:'), sg.Text(size=(15, 1), key='-personlig_passord-')],
+                [sg.Input(key='-password-', password_char='*')],
                 [sg.Button('Enter'), sg.Button('Exit')],
                 [sg.Button('Create user')]
         ]
@@ -87,7 +82,7 @@ while True:  # Event Loop
                 username = values['-username-']
                 pw = values['-password-']
         
-                sql = "SELECT username, password FROM users WHERE username =%s AND password = %s"
+                sql = "SELECT username, password FROM user WHERE username =%s AND password = %s"
                 mycursor.execute(sql, (username, pw))
                 myresult = mycursor.fetchall()
                 
@@ -104,9 +99,6 @@ while True:  # Event Loop
                 else:
                         sg.popup('Wrong username or password')
         
-        sql = "SELECT username, password FROM user WHERE username USERNAME = '%s' AND password = %s"
-        mycursor.execute(sql,(username, pw))
-        myresult = mycursor.fetchall()
 
        
 
