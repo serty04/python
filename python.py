@@ -29,14 +29,12 @@ def logg_inn_win_layout():
 
 def create_user_win_layout():
         layout = [
-                [sg.Text('email:', size=(15, 1), key='e_mail')],
-                [sg.Input(key='email_inp')],
                 [sg.Text('Username:', size=(15, 1), key='user')],
-                [sg.Input(key= 'user_inp')],
+                [sg.Input(key= 'create_username')],
                 [sg.Text('password:', size=(15, 1), key='password')],
-                [sg.Input(key= 'password_inp')],
+                [sg.Input(key= '-create_password-')],
                 [sg.Text('confirm password', size=(15, 1), key='confirm_password')],
-                [sg.Input(key= 'confirm_password_inp')],
+                [sg.Input(key= '-confirm_password-')],
                 [sg.Button('create'), sg.Button('Back')]
                 
         ]
@@ -108,6 +106,7 @@ while True:  # Event Loop
 
                 create_user_win.UnHide()
                 logg_inn_win.Hide()
+        
 
         
         if bank_win_active:
@@ -136,3 +135,20 @@ while True:  # Event Loop
                         logg_inn_win_active = True
                         logg_inn_win.UnHide()
                         create_user_win.Hide()
+                        username = values['-create_username-']    # -reg- er en key i layout
+                        password = values['-create_password-']
+                        
+
+                        sql = "INSERT INTO user(username, password) VALUES (%s, %s,)"
+                        val = (username, password)
+                        mycursor.execute(sql, val)
+
+                        mydb.commit()
+                        print(mycursor.rowcount, "record inserted.")
+
+                        sg.popup('User created successfully:')
+
+                
+
+              
+                
