@@ -85,19 +85,36 @@ while True:  # Event Loop
                 myresult = mycursor.fetchall()
                 
                 row_count = mycursor.rowcount
+
+
+
                
                         
                 if row_count == 1:
-                                event3, values3 = bank_win.read(timeout=100)
-                                bank_win_active = True
-                                logg_inn_win.Hide()
-                                bank_win.UnHide()
-                                
+                        event3, values3 = bank_win.read(timeout=100)
+                        bank_win_active = True
+
+                        sql = "SELECT username FROM user WHERE username =%s AND password = %s"
+                        print(username)
+                        mycursor.execute(sql, (username, pw))
+                        myresult = mycursor.fetchone()
+
+                        myid = myresult[0]
+
+                        logg_inn_win.Hide()
+                        bank_win.UnHide()
+                        sql = f"SELECT  money FROM user WHERE username  ='{myid}'"     
+
+                        print(myid)
+                        mycursor.execute(sql, myid)
+                        myresult = mycursor.fetchone()
+                        print(myresult)        
+
                 else:
                         sg.popup('Wrong username or password')
         
 
-       
+        
 
         if event == 'Create user':
                 create_user_win_active = True
@@ -148,7 +165,3 @@ while True:  # Event Loop
                         logg_inn_win.UnHide()
                         create_user_win.Hide()
                         
-                
-
-              
-                
